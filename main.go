@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/cookiejar"
 
@@ -19,8 +18,9 @@ func main() {
 	app.Login()
 	showQuery := GetQueries()
 	showList, idList := app.GetProjects(showQuery)
-	fmt.Println(showList)
-	fmt.Println(idList)
-	datatest := app.GetTickets(idList[0])
-	fmt.Println(datatest)
+	for i, show := range showList {
+		TicketData := app.GetTickets(idList[i])
+		data.DataTest(show, TicketData)
+	}
+	data.Display()
 }
