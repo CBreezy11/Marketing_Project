@@ -21,7 +21,8 @@ func main() {
 	showList, idList := App.GetProjects(showQuery)
 	for i, show := range showList {
 		TicketData := App.GetTickets(idList[i])
-		data.DataTest(show, TicketData)
+		DaySalesData := App.GetDaySales(idList[i])
+		data.DataTest(show, TicketData, DaySalesData)
 	}
 	data.Display()
 }

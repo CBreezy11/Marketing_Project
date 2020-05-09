@@ -9,19 +9,28 @@ type TicketTypeSales struct {
 	Total      string
 }
 
+type TicketDaySales struct {
+	Day string
+	Quantity string
+	Orders string
+	Sales string
+}
+
 
 type indShowData struct {
 	show string
 	ticketInfo []TicketTypeSales
+	ticketDaySalesInfo []TicketDaySales
 }
 
 var fullPacket []indShowData
 
 
-func DataTest(show string, ticketData []TicketTypeSales) {
+func DataTest(show string, ticketData []TicketTypeSales, ticketSalesData []TicketDaySales) {
 	singleShowLoad := indShowData {
 		show: show,
 		ticketInfo: ticketData,
+		ticketDaySalesInfo: ticketSalesData,
 	}
 	singleShowLoad.populatePacket()
 }
@@ -31,5 +40,7 @@ func (singleShowLoad *indShowData) populatePacket() {
 }
 
 func Display() {
-	fmt.Println(fullPacket[4].ticketInfo[1].Count)
+	for i := range fullPacket {
+		fmt.Println(fullPacket[i],"\n\n\n\n")
+	}
 }

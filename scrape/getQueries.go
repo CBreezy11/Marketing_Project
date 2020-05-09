@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func GetQueries() string {
@@ -12,7 +13,7 @@ func GetQueries() string {
 	in := bufio.NewScanner(os.Stdin)
 
 	if in.Scan() {
-		showQuery = in.Text()
+		showQuery = strings.ToLower(in.Text())
 	}
 
 	if err := in.Err(); err != nil {

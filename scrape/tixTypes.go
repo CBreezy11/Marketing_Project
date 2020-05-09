@@ -32,10 +32,10 @@ func (app *App) GetTickets(showId string) []data.TicketTypeSales {
 	}
 
 	document.Find("TABLE.report").Each(func(i int, s *goquery.Selection) {
-		ticketEntry := data.TicketTypeSales{}
 		if (i) == 1 {
-			data := s.Find("tbody")
-			data.Find("tr").Each(func(rowIndex int, row *goquery.Selection) {
+			daydata := s.Find("tbody")
+			daydata.Find("tr").Each(func(rowIndex int, row *goquery.Selection) {
+				ticketEntry := data.TicketTypeSales{}
 				if rowIndex > 0 {
 					row.Find("td").Each(func(dataIndex int, entry *goquery.Selection) {
 						switch dataIndex {
@@ -54,8 +54,8 @@ func (app *App) GetTickets(showId string) []data.TicketTypeSales {
 			})
 			totals := s.Find("tfoot")
 			totals.Find("tr").Each(func(footIndex int, footData *goquery.Selection) {
+				ticketEntry := data.TicketTypeSales{}
 				footData.Find("td").Each(func(footDataIndex int, footEntry *goquery.Selection) {
-					ticketEntry.Price = ""
 					switch footDataIndex {
 					case 0:
 						ticketEntry.TicketType = strings.TrimSpace(footEntry.Text())
