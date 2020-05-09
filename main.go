@@ -5,21 +5,22 @@ import (
 	"net/http/cookiejar"
 
 	"belly/data"
+	"belly/scrape"
 )
 
 
 func main() {
 	jar, _ := cookiejar.New(nil)
 
-	app := App{
+	App := scrape.App{
 		Client: &http.Client{Jar: jar},
 	}
 
-	app.Login()
-	showQuery := GetQueries()
-	showList, idList := app.GetProjects(showQuery)
+	App.Login()
+	showQuery := scrape.GetQueries()
+	showList, idList := App.GetProjects(showQuery)
 	for i, show := range showList {
-		TicketData := app.GetTickets(idList[i])
+		TicketData := App.GetTickets(idList[i])
 		data.DataTest(show, TicketData)
 	}
 	data.Display()
