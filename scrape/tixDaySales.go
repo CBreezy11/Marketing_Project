@@ -12,12 +12,12 @@ const (
 	ticketDaySalesGetURL = "https://secure.independenttickets.com/backstage/event/report_daily.php?id="
 )
 
-var DayTicketSales [] data.TicketDaySales
+
 
 func (app *App) GetDaySales(showId string) []data.TicketDaySales {
-
+	var DayTicketSales [] data.TicketDaySales
+	
 	ticketURL := ticketDaySalesGetURL + showId
-
 	client := app.Client
 	response, err := client.Get(ticketURL)
 	if err != nil {

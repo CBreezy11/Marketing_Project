@@ -1,6 +1,10 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/360EntSecGroup-Skylar/excelize"
+	"strings"
+)
 
 type TicketTypeSales struct {
 	TicketType string
@@ -20,30 +24,45 @@ type ZipCodeSales struct {
 	City, State, Zip, Quantity, Sales string
 }
 
-type indShowData struct {
-	show string
-	ticketInfo []TicketTypeSales
-	ticketDaySalesInfo []TicketDaySales
-	zipCodeSalesInfo []ZipCodeSales
+type IndShowData struct {
+	Show string
+	TicketInfo []TicketTypeSales
+	TicketDaySalesInfo []TicketDaySales
+	ZipCodeSalesInfo []ZipCodeSales
 }
 
-var fullPacket []indShowData
+var fullPacket []IndShowData
 
 
 func DataTest(show string, ticketData []TicketTypeSales, ticketSalesData []TicketDaySales, zipCodeSalesData []ZipCodeSales) {
-	singleShowLoad := indShowData {
-		show: show,
-		ticketInfo: ticketData,
-		ticketDaySalesInfo: ticketSalesData,
-		zipCodeSalesInfo: zipCodeSalesData,
+	singleShowLoad := IndShowData {
+		Show: show,
+		TicketInfo: ticketData,
+		TicketDaySalesInfo: ticketSalesData,
+		ZipCodeSalesInfo: zipCodeSalesData,
 	}
-	singleShowLoad.populatePacket()
-}
-
-func (singleShowLoad *indShowData) populatePacket() {
-	fullPacket = append(fullPacket, *singleShowLoad)
+	fullPacket = append(fullPacket, singleShowLoad)
 }
 
 func Display() {
 	fmt.Printf("%#v", fullPacket)
+}
+
+func StartExcel(showQuery string) {
+
+	fmt.Println("We have the data now preparing the Excel Sheet")
+
+	xlsx, err := excelize.OpenFile("./ShowData.xlsx")
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	populate(fullPacket, xlsx)
+	fileQuery := strings.Split(showQuery, " ")
+	filename := strings.Join(fileQuery, "")
+
+	err = xlsx.SaveAs("./" + filename + ".xlsx")
+	if err != nil {
+		fmt.Println(err)
+	}	
 }
