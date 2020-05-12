@@ -32,11 +32,7 @@ func main() {
 		data.DataTest(show, TicketData, DaySalesData, ZipSalesData)
 	}
 	data.StartExcel(showQuery)
-<<<<<<< HEAD
 	fmt.Println("Done!")
-=======
-	fmt.Println("Done")
->>>>>>> 6397941ff6d267591a3c8f6a381a9a12f347ac38
 }
 
 
