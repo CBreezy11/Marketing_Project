@@ -32,6 +32,7 @@ func main() {
 		data.DataTest(show, TicketData, DaySalesData, ZipSalesData)
 	}
 	data.StartExcel(showQuery)
+	fmt.Println("Done!")
 }
 
 

@@ -12,8 +12,8 @@ const (
 )
 
 var (
-	username = ""
-	password = ""
+	username = "manager@bellyupaspen.com"
+	password = "Brandon15"
 )
 
 type App struct {

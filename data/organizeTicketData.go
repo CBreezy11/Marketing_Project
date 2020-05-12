@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/360EntSecGroup-Skylar/excelize"
 	"strings"
+	"os"
 )
 
 type TicketTypeSales struct {
@@ -61,7 +62,12 @@ func StartExcel(showQuery string) {
 	fileQuery := strings.Split(showQuery, " ")
 	filename := strings.Join(fileQuery, "")
 
-	err = xlsx.SaveAs("./" + filename + ".xlsx")
+	path, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = xlsx.SaveAs(path + "/" + filename + ".xlsx")
 	if err != nil {
 		fmt.Println(err)
 	}	
